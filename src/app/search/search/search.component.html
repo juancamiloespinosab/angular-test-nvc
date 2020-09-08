@@ -1,0 +1,13 @@
+<form [formGroup]="searchForm" (ngSubmit)="searchMovies()">
+    <label>Buscar pelicula</label>
+    <input (click)="this.incorrectForm = false" type="text" placeholder="nombre de la pelicula"
+        formControlName="keywords">
+
+    <input type="submit" value="Buscar">
+
+    <div *ngIf="incorrectForm">
+        <p *ngIf="this.searchForm.get('keywords').hasError('required')">el campo no puede estar vacio</p>
+        <p *ngIf="this.searchForm.get('keywords').hasError('pattern')">el campo no peude contener caracteres especiales
+        </p>
+    </div>
+</form>
