@@ -1,1 +1,13 @@
-<p>poster works!</p>
+<div class="poster-component" *ngIf="this.detail" >
+
+    <div class="poster-component__contain">
+
+        <h3 class="poster-component__title">
+            {{ this.detail.title | uppercase }}</h3>
+        <div class="poster-component__description">{{ this.detail.overview }}</div>
+
+    </div>
+
+    <div class="poster-component__image" [style.backgroundImage]="getImageBackground()"></div>
+
+</div>
