@@ -77,7 +77,7 @@ export class ImdbService {
     });
   }
 
-  getActors(movieData: interfaces.Movie): interfaces.Movie {
+  private getActors(movieData: interfaces.Movie): interfaces.Movie {
     const uri: string = `${this.API_URL}/${movieData.type}/${movieData.id}/credits?api_key=${this.API_KEY}`;
 
     this.httpRequest(uri, httpResponse => {
@@ -107,6 +107,77 @@ export class ImdbService {
     });
 
     return movieData;
+  }
+
+  getDetail(movieId: number, detailResponse: any) {
+    const uri: string = `${this.API_URL}/tv/${movieId}?api_key=${this.API_KEY}&language=es`;
+    let response: interfaces.Response;
+
+    this.httpRequest(uri, httpResponse => {
+      if (httpResponse.ok) {
+        let seasonsLength: number = httpResponse.data.seasons.length;
+        let seasonsList: interfaces.Season[];
+
+        let detail: interfaces.Detail = {
+          id: httpResponse.data.id,
+          title: httpResponse.data.original_name,
+          imgPosterPath: httpResponse.data.poster_path || httpResponse.data.backdrop_path,
+          overview: httpResponse.data.overview,
+          seasons: this.getSeasons(httpResponse.data.id, httpResponse.data.seasons)
+        }
+
+        response = {
+          ok: true,
+          data: detail
+        }
+
+        detailResponse(response);
+      } else {
+        response = {
+          ok: false,
+          data: 'Ha ocurrido un error al consultar el detalle de la serie'
+        }
+      }
+    });
+
+
+  }
+
+  private getSeasons(movieId: number, seasons: any[]): interfaces.Season[] {
+    let seasonsList: interfaces.Season[] = [];
+
+    seasons.forEach(season => {
+      let tmpSeason: interfaces.Season = {
+        number: season.season_number,
+        episodes: this.getEpisodes(movieId, season.season_number)
+      }
+
+      seasonsList.push(tmpSeason);
+
+    });
+
+    return seasonsList;
+  }
+
+  private getEpisodes(movieId, seasonNumber): interfaces.Episode[] {
+    const uri: string = `${this.API_URL}/tv/${movieId}/season/${seasonNumber}?api_key=${this.API_KEY}&language=es`;
+
+    let episodesList: interfaces.Episode[] = [];
+
+    this.httpRequest(uri, httpResponse => {
+      if (httpResponse.ok) {
+        httpResponse.data.episodes.forEach(episode => {
+          let tmpEpisode: interfaces.Episode = {
+            number: episode.episode_number,
+            name: episode.name
+          }
+          episodesList.push(tmpEpisode);
+        });
+
+      }
+    })
+
+    return episodesList;
   }
 
   private httpRequest(uri: string, httpResponse: any) {
