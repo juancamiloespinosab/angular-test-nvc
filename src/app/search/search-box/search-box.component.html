@@ -1,0 +1,21 @@
+<form class="search-box" [formGroup]="searchForm" (ngSubmit)="search()">
+
+    <h1 class="search-box__title">IMDB Search</h1>
+
+    <div class="search-box__box">
+        <input #input class="search-box__input" (click)="this.incorrectForm = false" type="text"
+            placeholder="Buscar película o serie" formControlName="keywords">
+
+        <div class="search-box__message-box" [style.animation]="'slidedown 2s'" *ngIf="incorrectForm">
+            <p class="search-box__message" *ngIf="this.searchForm.get('keywords').hasError('required')">El campo no
+                puede estar vacio</p>
+            <p class="search-box__message" *ngIf="this.searchForm.get('keywords').hasError('pattern')">El campo no puede
+                contener caracteres especiales cómo: @, *, #
+            </p>
+        </div>
+
+        <input class="search-box__btn" type="submit">
+    </div>
+
+
+</form>

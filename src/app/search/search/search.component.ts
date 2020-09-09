@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ImdbService } from 'src/app/services/imdb.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import * as interfaces from 'src/app/interfaces/interfaces';
+
 
 @Component({
   selector: 'app-search',
@@ -9,30 +10,43 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class SearchComponent implements OnInit {
 
-  page: number;
-  totalPages: number;
-
-  searchForm: FormGroup;
-  incorrectForm: boolean = false;
+  searchData;
+  moviesList = [];
 
   constructor(private imdbService: ImdbService) { }
 
   ngOnInit(): void {
-    this.searchForm = new FormGroup({
-      keywords: new FormControl('', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9 ]+')])
-      //keywords: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9 ]*')])
+    this.searchData = {
+      keywords: '',
+      page: 1,
+      totalPages: 1
+    }
+
+  }
+
+  searchMovies(searchData: interfaces.SearchData) {
+    
+    this.imdbService.getMovies(searchData, res => {
+      console.log(res.data)
+      if (res.ok) {
+        this.searchData = res.searchData;
+        res.data.forEach(element => {
+          this.moviesList.push(element)
+        });
+      }
+
+
     });
   }
 
-  searchMovies() {
-    if (this.searchForm.valid) {
-      this.imdbService.getMovies(this.searchForm.controls['keywords'].value, 1, res => {
-        console.log(res)
-      });
-    } else {
-      this.incorrectForm = true;
-    }
 
+  onScroll() {
+    if (this.searchData.page < this.searchData.totalPages) {
+      this.searchData.page++;
+      this.searchMovies(this.searchData)
+    } else {
+      console.log('No more lines. Finish page!');
+    }
   }
 
 }
