@@ -12,6 +12,9 @@ import { DetailComponent } from './detail/detail/detail.component';
 import { SearchBoxComponent } from './search/search-box/search-box.component';
 import { MovieCardComponent } from './search/movie-card/movie-card.component';
 import { BackBoxComponent } from './detail/back-box/back-box.component';
+import { PosterComponent } from './detail/poster/poster.component';
+import { SeasonsControllerComponent } from './detail/seasons-controller/seasons-controller.component';
+import { EpisodeBoxComponent } from './detail/episode-box/episode-box.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { BackBoxComponent } from './detail/back-box/back-box.component';
     DetailComponent,
     SearchBoxComponent,
     MovieCardComponent,
-    BackBoxComponent
+    BackBoxComponent,
+    PosterComponent,
+    SeasonsControllerComponent,
+    EpisodeBoxComponent
   ],
   imports: [
     BrowserModule,

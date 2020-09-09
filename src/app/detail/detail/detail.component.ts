@@ -14,7 +14,7 @@ export class DetailComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.movieId = this.activatedRoute.snapshot.params.id;
+    //this.movieId = this.activatedRoute.snapshot.params.id;
   }
 
   goBack() {

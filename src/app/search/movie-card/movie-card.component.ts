@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as interfaces from 'src/app/interfaces/interfaces';
+import { Router } from '@angular/router';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-movie-card',
@@ -10,9 +12,9 @@ export class MovieCardComponent implements OnInit {
 
   @Input() movieData: interfaces.Movie;
 
-  constructor() {
+  constructor(private router: Router, private utilService: UtilService) { }
 
-  }
+  ngOnInit(): void { }
 
   getImageBackground(movieData: interfaces.Movie) {
     if (movieData.imgBackdropPath == null) {
@@ -27,7 +29,19 @@ export class MovieCardComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
+  goToDetail(movieData: interfaces.Movie) {
+
+    if (movieData.type == 'tv') {
+      this.router.navigate(
+        [{
+          outlets:
+            { popup: ['detail', movieData.id] }
+        }]
+      );
+
+    }
+
   }
+
 
 }

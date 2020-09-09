@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as interfaces from 'src/app/interfaces/interfaces';
+import { UtilService } from './util.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,10 @@ export class ImdbService {
   private movieListLimit: number = 9;
   private actorListLimit: number = 3;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private utilService: UtilService) { }
 
   getMovies(searchData: interfaces.SearchData, moviesResponse: any) {
-    const uri: string = `${this.API_URL}/search/multi?api_key=${this.API_KEY}&query=${this.replaceSpaces(searchData.keywords)}&page=${searchData.page}&language=es`;
+    const uri: string = `${this.API_URL}/search/multi?api_key=${this.API_KEY}&query=${this.utilService.replaceSpaces(searchData.keywords)}&page=${searchData.page}&language=es`;
 
     this.httpRequest(uri, httpResponse => {
       let response: interfaces.Response;
@@ -128,8 +129,6 @@ export class ImdbService {
       });
   }
 
-  private replaceSpaces(words) {
-    return words.replace(' ', '+');
-  }
+
 
 }

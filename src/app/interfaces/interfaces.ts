@@ -23,3 +23,20 @@ export interface Response {
     data: any | Movie[],
     searchData?: SearchData
 }
+
+export interface Detail {
+    id: number,
+    title: string,
+    imgPosterPath: string,
+    seasons: Season[]
+}
+
+export interface Season {
+    number: number,
+    episodes: Episode[]
+}
+
+export interface Episode {
+    number: number,
+    name: string
+}
