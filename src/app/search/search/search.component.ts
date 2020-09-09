@@ -27,7 +27,7 @@ export class SearchComponent implements OnInit {
   searchMovies(searchData: interfaces.SearchData) {
 
     this.imdbService.getMovies(searchData, res => {
-      console.log(res.data)
+
       if (res.ok) {
         this.searchData = res.searchData;
         res.data.forEach(element => {

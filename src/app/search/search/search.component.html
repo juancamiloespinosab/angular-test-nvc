@@ -1,9 +1,27 @@
 <main class="search">
-    <header class="search-box-container">
+
+    <div class="search-inner">
+
+        <header class="search-header">
+            <app-search-box class="search-header__search-box" (searchEvent)="searchMovies($event)"></app-search-box>
+        </header>
+
+        <section class="search-body" infiniteScroll [infiniteScrollDistance]="0" (scrolled)="onScroll()">
+            <div class="search-body__movie-card-container">
+                <app-movie-card *ngFor="let movie of moviesList" [movieData]="movie" class="search-body__movie-card">
+                </app-movie-card>
+
+                <div class="loading"> loading </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- <header class="search-box-container central-column">
         <app-search-box class="search-box-component" (searchEvent)="searchMovies($event)"></app-search-box>
     </header>
 
-    <section class="search-movies" infiniteScroll [infiniteScrollDistance]="0" (scrolled)="onScroll()">
+    <section class="search-movies central-column" infiniteScroll [infiniteScrollDistance]="0" (scrolled)="onScroll()">
         <div class="search-movies__movie-card-container">
             <app-movie-card *ngFor="let movie of moviesList" class="search-movies__movie-card-component"
                 [movieData]="movie" class="search-movies__movie-card">
@@ -11,6 +29,6 @@
 
             <div class="loading"> loading </div>
         </div>
-    </section>
+    </section> -->
 
 </main>

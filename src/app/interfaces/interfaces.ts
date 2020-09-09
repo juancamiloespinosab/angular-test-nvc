@@ -28,6 +28,7 @@ export interface Detail {
     id: number,
     title: string,
     imgPosterPath: string,
+    overview: string,
     seasons: Season[]
 }
 

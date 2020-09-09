@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-back-box',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BackBoxComponent implements OnInit {
 
+  @Output() goBackEvent = new EventEmitter<any>();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  goBack() {
+    this.goBackEvent.emit(null);
   }
 
 }

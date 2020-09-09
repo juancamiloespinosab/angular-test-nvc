@@ -1,23 +1,34 @@
 <div class="detail">
-    <header class="back-box-container">
-        <app-back-box class="back-box-component"></app-back-box>
-    </header>
 
-    <section class="detail-container">
+    <div class="detail-inner">
 
-        <div class="detail-container__poster"></div>
+        <header class="detail-header">
+            <app-back-box (goBackEvent)="goBack()" class="detail-header__back-box-component"></app-back-box>
+        </header>
 
-        <div class="detail-container__seasons-container">
+        <section class="detail-body">
 
-            <h2 class="detail-container__seasons-title">TEMPORADAS</h2>
+            <!-- <div class="detail-container__poster"></div> -->
+            <app-poster [detail]="this.detail" class="detail-body__poster-component"></app-poster>
 
-            <div class="detail-container__seasons-controller"></div>
+            <div class="detail-body__seasons-container">
 
-            <div class="detail-container__episodes-list">
-                <div class="detail-container__episode-box"></div>
+                <h4 class="detail-body__seasons-title">TEMPORADAS</h4>
+
+                <!-- <div class="detail-container__seasons-controller"></div> -->
+                <app-seasons-controller [seasons]="this.detail.seasons"
+                    class="detail-body__seasons-controller-component"></app-seasons-controller>
+
+                <div class="detail-body__episodes-list">
+                    <!-- <div class="detail-container__episode-box"></div> -->
+                    <app-episode-box class="detail-body__episode-box-component"></app-episode-box>
+                </div>
+
             </div>
 
-        </div>
+        </section>
 
-    </section>
+    </div>
+
+
 </div>
