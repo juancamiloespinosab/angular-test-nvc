@@ -1,8 +1,14 @@
 <div class="movie-card">
+
     <div class="movie-card__card-container">
 
-        <!-- <img class="movie-card__img" [src]="'https://image.tmdb.org/t/p/w500/' + movieData.imgBackdropPath"
-                onerror="this.src = '../../assets/placeholder/movieplaceholder.jpg';"> -->
+        <div class="movie-card__card-detail">
+            Rating: {{ movieData.rating }}
+
+            <span *ngFor="let actor of movieData.actors">
+                {{ actor.name }}
+            </span>
+        </div>
 
         <div class="movie-card__img" [style.backgroundImage]="getImageBackground(movieData)">
         </div>
@@ -11,5 +17,8 @@
         <div class="movie-card__title">
             <p class="movie-card__title-text">{{ movieData.title | uppercase }}</p>
         </div>
+
+
     </div>
+
 </div>

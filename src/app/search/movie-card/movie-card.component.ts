@@ -19,7 +19,7 @@ export class MovieCardComponent implements OnInit {
       if (movieData.imgPosterPath == null) {
         return "url('../../assets/placeholder/movieplaceholder.jpg')"
       } else {
-        //return `url('https://image.tmdb.org/t/p/w500/${movieData.imgPosterPath}')`
+        return `url('https://image.tmdb.org/t/p/w500/${movieData.imgPosterPath}')`
       }
     } else {
       return `url('https://image.tmdb.org/t/p/w500/${movieData.imgBackdropPath}')`

@@ -1,6 +1,9 @@
 <main class="search">
     <header class="search-box-container">
         <app-search-box class="search-box-component" (searchEvent)="searchMovies($event)"></app-search-box>
+        <!-- <a routerLink="/detail">popup</a> -->
+        <p (click)="goToDetail()">goToDetail</p>
+
     </header>
 
     <section class="search-movies" infiniteScroll [infiniteScrollDistance]="0" (scrolled)="onScroll()">

@@ -11,6 +11,7 @@ import { SearchComponent } from './search/search/search.component';
 import { DetailComponent } from './detail/detail/detail.component';
 import { SearchBoxComponent } from './search/search-box/search-box.component';
 import { MovieCardComponent } from './search/movie-card/movie-card.component';
+import { BackBoxComponent } from './detail/back-box/back-box.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MovieCardComponent } from './search/movie-card/movie-card.component';
     SearchComponent,
     DetailComponent,
     SearchBoxComponent,
-    MovieCardComponent
+    MovieCardComponent,
+    BackBoxComponent
   ],
   imports: [
     BrowserModule,

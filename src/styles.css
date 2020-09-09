@@ -9,30 +9,34 @@ body {
 
 /* -- General -- */
 
-.search {
+.search, .detail {
     height: 100vh;
     display: grid;
     grid-template-rows: 20% 1fr;
 }
 
-/* -- Search Box -- */
-
-.search-box-component, .search-movies {
+.search-box-component, .search-movies, .back-box-component {
     height: 100%;
     display: grid;
     grid-template-columns: 15% 70% 15%;
 }
 
-.search-box {
+.search-box, .back-box {
     grid-column: 2/3;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.search-box__title {
+.search-box__title, .back-box__title {
     color: #ADB4C3;
     font-size: 40px;
+}
+
+/* -- Search Box -- */
+
+.search-box {
+    justify-content: space-between;
 }
 
 .search-box__box {
@@ -100,7 +104,6 @@ body {
 .movie-card {
     max-width: 350px;
     /* min-width: 300px; */
-    position: relative;
     height: 250px;
     display: flex;
     align-items: flex-start;
@@ -109,11 +112,41 @@ body {
 }
 
 .movie-card__card-container {
+    position: relative;
     width: 100%;
     padding: 10px;
     background-color: white;
     box-shadow: 0 10px 15px -5px #747F8A;
+    overflow: hidden;
     cursor: pointer;
+    transform: translateY(0);
+    transition: transform .2s;
+}
+
+.movie-card__card-container:hover {
+    transform: translateY(-10%)
+}
+
+.movie-card__card-container:hover .movie-card__card-detail {
+    opacity: 1;
+}
+
+.movie-card__card-container:hover .movie-card__img {
+    transform: scale(2);
+    filter: blur(5px);
+}
+
+.movie-card__card-detail {
+    position: absolute;
+    background-color: rgba(255, 255, 255, .8);
+    filter: blur(0);
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 20;
+    opacity: 0;
+    transition: all 1s;
 }
 
 .movie-card__img {
@@ -122,6 +155,9 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    filter: blur(0);
+    z-index: 10;
+    transition: transform .5s, filter .5s;
 }
 
 .movie-card__title {
@@ -142,6 +178,20 @@ body {
 .loading {
     grid-column: 1/4;
     height: 300px;
+}
+
+/* -- Detail -- */
+
+.detail {
+    height: 100%;
+    width: 100%;
+    background-color: #E8E9EE;
+    position: fixed;
+    top: 0;
+}
+
+.back-box {
+    justify-content: start;
 }
 
 /* -- Animations -- */

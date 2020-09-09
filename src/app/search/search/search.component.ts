@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ImdbService } from 'src/app/services/imdb.service';
 import * as interfaces from 'src/app/interfaces/interfaces';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class SearchComponent implements OnInit {
   searchData;
   moviesList = [];
 
-  constructor(private imdbService: ImdbService) { }
+  constructor(private imdbService: ImdbService, private router: Router) { }
 
   ngOnInit(): void {
     this.searchData = {
@@ -25,7 +26,7 @@ export class SearchComponent implements OnInit {
   }
 
   searchMovies(searchData: interfaces.SearchData) {
-    
+
     this.imdbService.getMovies(searchData, res => {
       console.log(res.data)
       if (res.ok) {
@@ -47,6 +48,10 @@ export class SearchComponent implements OnInit {
     } else {
       console.log('No more lines. Finish page!');
     }
+  }
+
+  goToDetail() {
+    this.router.navigate([{outlets: { popup: 'detail/21'}}]);
   }
 
 }
