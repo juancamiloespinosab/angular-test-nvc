@@ -7,25 +7,32 @@ body {
     background-color: #E8E9EE;
 }
 
+.body-disabled-scroll {
+    overflow: hidden;
+}
+
+p, h1, h2, h3, h4 {
+    margin: 0;
+    padding: 0;
+}
+
 /* -- General -- */
 
 .search, .detail {
     height: 100vh;
     display: grid;
-    grid-template-rows: 20% 1fr;
-}
-
-.search-box-component, .search-movies, .back-box-component {
-    height: 100%;
-    display: grid;
     grid-template-columns: 15% 70% 15%;
 }
 
-.search-box, .back-box {
+.search-inner, .detail-inner {
     grid-column: 2/3;
-    display: flex;
+    display: grid;
+    grid-template-rows: 20vh 1fr;
+}
+
+.search-header, .detail-header {
+    display: grid;
     align-items: center;
-    justify-content: space-between;
 }
 
 .search-box__title, .back-box__title {
@@ -34,6 +41,12 @@ body {
 }
 
 /* -- Search Box -- */
+
+.search-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
 .search-box {
     justify-content: space-between;
@@ -94,7 +107,7 @@ body {
 
 /* -- Movie Card -- */
 
-.search-movies__movie-card-container {
+.search-body__movie-card-container {
     grid-column: 2/3;
     display: grid;
     grid-template-columns: repeat( 3, 1fr);
@@ -191,7 +204,91 @@ body {
 }
 
 .back-box {
-    justify-content: start;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.detail-body {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: 90%;
+}
+
+.detail-body__poster-component {}
+
+.detail-body__seasons-container {
+    display: grid;
+    grid-template-rows: 8% 12% 1fr;
+}
+
+.detail-body__seasons-title {
+    /* outline: 3px solid green; */
+}
+
+.detail-body__seasons-controller-component {
+    outline: 3px solid red;
+}
+
+.detail-body__episodes-list {
+    outline: 3px solid blue;
+}
+
+/* -- Poster -- */
+
+.poster-component {
+    height: 100%;
+    position: relative;
+    padding: 10px;
+    overflow: hidden;
+    background-color: #F2F4FA;
+    box-shadow: 0 10px 15px -5px #747F8A;
+    cursor: pointer;
+}
+
+.poster-component__image {
+    height: 100%;
+    /* background-image: url('https://image.tmdb.org/t/p/w300_and_h450_bestv2/eTMMU2rKpZRbo9ERytyhwatwAjz.jpg'); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.poster-component__contain {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 90%;
+    left: 0;
+    background-color: inherit;
+    display: grid;
+    grid-template-rows: 10% 1fr;
+    align-items: center;
+    opacity: 1;
+    transition: top .5s, opacity .5s;
+}
+
+.poster-component:hover .poster-component__contain {
+    top: 0;
+    opacity: .95;
+}
+
+.poster-component__title {
+    color: #ADB4C3;
+    font-size: 25px;
+    padding: 10px;
+}
+
+.poster-component__description {
+    padding: 30px;
+}
+
+/* -- Seasons -- */
+
+.detail-body__seasons-title {
+    color: #ADB4C3;
+    font-size: 25px;
+    padding: 10px;
 }
 
 /* -- Animations -- */
