@@ -6,7 +6,9 @@ import { DetailComponent } from './detail/detail/detail.component';
 const routes: Routes = [
   { path: 'detail/:id', component: DetailComponent, outlet: 'popup' },
   { path: 'search', component: SearchComponent },
-  { path: '', redirectTo: 'search', pathMatch: 'full' }
+  { path: '', redirectTo: 'search', pathMatch: 'full' },
+  { path: '**', redirectTo: 'search', pathMatch: 'full' },
+
 ];
 
 @NgModule({
