@@ -276,13 +276,13 @@ p, h1, h2, h3, h4 {
 
 .back-box__btn {
     position: relative;
-    background-color: #E2E3E9;
+    background-color: #ADB4C3;
     border: none;
     width: 150px;
     padding: 20px;
     cursor: pointer;
     clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
-    color: #9C9DA6;
+    color: white;
     font-size: 20px;
     box-shadow: 0 10px 15px -5px black;
 }
