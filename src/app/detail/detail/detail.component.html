@@ -1,4 +1,4 @@
-<div class="detail">
+<div class="detail" *ngIf="this.detail">
 
     <div class="detail-inner">
 
@@ -16,12 +16,17 @@
                 <h4 class="detail-body__seasons-title">TEMPORADAS</h4>
 
                 <!-- <div class="detail-container__seasons-controller"></div> -->
-                <app-seasons-controller [seasons]="this.detail.seasons"
+                <app-seasons-controller (showEpisodesEvent)="showEpisodes($event)" [seasons]="this.detail.seasons"
                     class="detail-body__seasons-controller-component"></app-seasons-controller>
 
                 <div class="detail-body__episodes-list">
                     <!-- <div class="detail-container__episode-box"></div> -->
-                    <app-episode-box class="detail-body__episode-box-component"></app-episode-box>
+
+                    <div class="detail-body__episode-box-container">
+                        <app-episode-box *ngFor="let episode of detail.seasons[this.actualSeasonNumberArray].episodes"
+                            [episode]="episode" class="detail-body__episode-box-component"></app-episode-box>
+                    </div>
+
                 </div>
 
             </div>

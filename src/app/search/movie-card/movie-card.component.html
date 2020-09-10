@@ -1,14 +1,28 @@
 <div class="movie-card" (click)="goToDetail(movieData)">
 
+
+
     <div class="movie-card__card-container">
 
-        <div class="movie-card__card-detail">
-            Rating: {{ movieData.rating }}
 
-            <span *ngFor="let actor of movieData.actors">
-                {{ actor.name }}
-            </span>
+        <div class="movie-card__card-detail">
+
+            <div class="movie-card__type">{{ this.getMediaType() | uppercase }}</div>
+
+            <div class="movie-card__rating">
+                Rating: {{ movieData.rating }} <div class="movie-card__star"></div>
+            </div>
+
+            <div class="movie-card__actors">
+                <p>Actores:</p>
+                <p *ngFor="let actor of movieData.actors">
+                    {{ actor.name }}
+                </p>
+            </div>
+
+
         </div>
+
 
         <div class="movie-card__img" [style.backgroundImage]="getImageBackground(movieData)">
         </div>

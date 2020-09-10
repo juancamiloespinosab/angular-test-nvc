@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ImdbService } from 'src/app/services/imdb.service';
 import * as interfaces from 'src/app/interfaces/interfaces';
+import { UtilService } from 'src/app/services/util.service';
 
 
 @Component({
@@ -10,10 +11,12 @@ import * as interfaces from 'src/app/interfaces/interfaces';
 })
 export class SearchComponent implements OnInit {
 
-  searchData;
-  moviesList = [];
+  searchData: interfaces.SearchData;
+  moviesList: interfaces.Movie[] = [];
+  loading: boolean = false;
+  statusMessage: string = null;
 
-  constructor(private imdbService: ImdbService) { }
+  constructor(private imdbService: ImdbService, private utilService: UtilService) { }
 
   ngOnInit(): void {
     this.searchData = {
@@ -21,10 +24,17 @@ export class SearchComponent implements OnInit {
       page: 1,
       totalPages: 1
     }
-
+    this.statusMessage = '¡Bienvenido!';
+    this.utilService.activeGeneralScroll();
   }
 
   searchMovies(searchData: interfaces.SearchData) {
+    this.loading = true;
+    this.statusMessage = null;
+
+    if (searchData.keywords != this.searchData.keywords) {
+      this.moviesList = []
+    }
 
     this.imdbService.getMovies(searchData, res => {
 
@@ -33,8 +43,11 @@ export class SearchComponent implements OnInit {
         res.data.forEach(element => {
           this.moviesList.push(element)
         });
+      } else {
+        this.statusMessage = res.data;
       }
 
+      this.loading = false;
 
     });
   }
@@ -45,7 +58,9 @@ export class SearchComponent implements OnInit {
       this.searchData.page++;
       this.searchMovies(this.searchData)
     } else {
-      console.log('No more lines. Finish page!');
+      this.loading = false;
+      this.statusMessage = 'Has llegado al final!';
+
     }
   }
 

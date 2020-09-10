@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import * as interfaces from 'src/app/interfaces/interfaces';
 
 @Component({
   selector: 'app-episode-box',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./episode-box.component.css']
 })
 export class EpisodeBoxComponent implements OnInit {
+
+  @Input() episode: interfaces.Episode;
 
   constructor() { }
 

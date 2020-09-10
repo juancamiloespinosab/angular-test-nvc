@@ -1,0 +1,9 @@
+<div class="seasons-controller" *ngIf="seasons">
+
+    <div (click)="changeSeason($event)" class="seasons-controller__container">
+        <div #box class="seasons-controller__box" *ngFor="let season of seasons; index as i" [id]="season.number"
+            [ngClass]="{'seasons-controller__box--active': box.id == this.actualSeasonNumber}">
+            {{ season.number }}</div>
+    </div>
+
+</div>

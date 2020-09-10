@@ -1,4 +1,4 @@
-<main class="search">
+<main id="top" class="search">
 
     <div class="search-inner">
 
@@ -6,12 +6,17 @@
             <app-search-box class="search-header__search-box" (searchEvent)="searchMovies($event)"></app-search-box>
         </header>
 
-        <section class="search-body" infiniteScroll [infiniteScrollDistance]="0" (scrolled)="onScroll()">
+        <section class="search-body" infiniteScroll [infiniteScrollDistance]="0.5" (scrolled)="onScroll()">
             <div class="search-body__movie-card-container">
                 <app-movie-card *ngFor="let movie of moviesList" [movieData]="movie" class="search-body__movie-card">
                 </app-movie-card>
 
-                <div class="loading"> loading </div>
+                <div class="loading__container">
+                    <div *ngIf="loading" class="loading__circle"></div>
+                    <div *ngIf="statusMessage" class="loading__status">
+                        <span>{{ statusMessage }}</span>
+                    </div>
+                </div>
             </div>
         </section>
 

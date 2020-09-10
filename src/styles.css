@@ -92,7 +92,7 @@ p, h1, h2, h3, h4 {
 .search-box__message-box {
     position: absolute;
     width: 85%;
-    top: 80%;
+    top: 100%;
     text-align: center;
     font-size: 20px;
     font-weight: 300;
@@ -159,7 +159,39 @@ p, h1, h2, h3, h4 {
     top: 0;
     z-index: 20;
     opacity: 0;
+    display: grid;
+    grid-template-rows: 40% 1fr;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
     transition: all 1s;
+}
+
+.movie-card__rating {
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 10px 15px -5px black;
+}
+
+.movie-card__star {
+    background-image: url("src/assets/icons/star.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding: 8px;
+    display: inline-block;
+}
+
+/* .movie-card__actors {} */
+
+.movie-card__type {
+    top: 0;
+    right: 0;
+    position: absolute;
+    z-index: 20;
+    background-color: #F0EE60;
+    padding: 5px;
+    border-radius: 30px;
 }
 
 .movie-card__img {
@@ -171,6 +203,7 @@ p, h1, h2, h3, h4 {
     filter: blur(0);
     z-index: 10;
     transition: transform .5s, filter .5s;
+    animation: appear 3s;
 }
 
 .movie-card__title {
@@ -188,9 +221,41 @@ p, h1, h2, h3, h4 {
 
 /* -- Loading -- */
 
-.loading {
-    grid-column: 1/4;
+.loading__container {
     height: 300px;
+    grid-column: 1/4;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.loading__circle {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: grey;
+    animation-duration: .5s;
+    animation-name: loading;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.loading__circle::after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: grey;
+    animation-duration: .5s;
+    animation-name: loading;
+    animation-iteration-count: infinite;
+    animation-direction: reverse;
+}
+
+.loading__status {
+    font-size: 30px;
 }
 
 /* -- Detail -- */
@@ -201,38 +266,51 @@ p, h1, h2, h3, h4 {
     background-color: #E8E9EE;
     position: fixed;
     top: 0;
+    animation: fade-in .5s;
 }
 
 .back-box {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-columns: 170px 1fr;
+}
+
+.back-box__btn {
+    position: relative;
+    background-color: #E2E3E9;
+    border: none;
+    width: 150px;
+    padding: 20px;
+    cursor: pointer;
+    clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
+    color: #9C9DA6;
+    font-size: 20px;
+    box-shadow: 0 10px 15px -5px black;
 }
 
 .detail-body {
     display: grid;
-    grid-template-columns: 30% 70%;
-    grid-template-rows: 90%;
+    grid-template-columns: 35% 65%;
+    grid-template-rows: 90% 1fr;
+    grid-column-gap: 40px;
 }
 
-.detail-body__poster-component {}
+/* .detail-body__poster-component {} */
 
 .detail-body__seasons-container {
+    grid-row: 1/3;
+    grid-column: 2/3;
     display: grid;
-    grid-template-rows: 8% 12% 1fr;
+    grid-template-rows: 8% 15% 1fr;
 }
 
-.detail-body__seasons-title {
-    /* outline: 3px solid green; */
+/* .detail-body__seasons-title {
 }
 
 .detail-body__seasons-controller-component {
-    outline: 3px solid red;
 }
 
 .detail-body__episodes-list {
-    outline: 3px solid blue;
-}
+} */
 
 /* -- Poster -- */
 
@@ -291,6 +369,70 @@ p, h1, h2, h3, h4 {
     padding: 10px;
 }
 
+/* -- Seasons Controller -- */
+
+.seasons-controller {
+    height: 100%;
+    position: relative;
+}
+
+.seasons-controller__container {
+    overflow-y: scroll;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: grid;
+    grid-template-columns: repeat( auto-fit, 60px);
+    grid-gap: 5px;
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-items: center;
+}
+
+.seasons-controller__box {
+    width: 50px;
+    height: 60px;
+    background-color: #F2F2F2;
+    box-shadow: 0 5px 15px -5px #747F8A;
+    color: #ADB4C3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color .5s;
+}
+
+.seasons-controller__box--active {
+    background-color: #747F8A;
+    color: white;
+    box-shadow: none;
+}
+
+/* -- Episode Box -- */
+
+.detail-body__episodes-list {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+.detail-body__episode-box-container {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.episode-box {
+    padding: 20px;
+    color: #ADB4C3;
+    font-size: 20px;
+    box-shadow: 0 5px 5px -5px #747F8A;
+    display: grid;
+    grid-template-columns: 10% 1fr;
+}
+
 /* -- Animations -- */
 
 @keyframes slide-down {
@@ -309,6 +451,26 @@ p, h1, h2, h3, h4 {
     }
     100% {
         opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes loading {
+    0% {
+        background-color: #73747A;
+        transform: scale(0);
+    }
+    100% {
+        background-color: #DEE0E7;
         transform: scale(1);
     }
 }

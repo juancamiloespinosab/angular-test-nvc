@@ -43,5 +43,11 @@ export class MovieCardComponent implements OnInit {
 
   }
 
+  getMediaType() {
+    let type: string = '';
+    (this.movieData.type == 'tv') ? type = 'serie' : type = 'película';
+    return type;
+  }
+
 
 }

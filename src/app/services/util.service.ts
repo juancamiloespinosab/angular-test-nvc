@@ -5,7 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class UtilService {
 
-  constructor() { }
+  body: any;
+
+  constructor() {
+    this.body = document.getElementsByTagName('body')[0];
+  }
 
   replaceSpaces(words) {
     return words.replace(' ', '+');
@@ -13,5 +17,13 @@ export class UtilService {
 
   replaceSlash(text) {
     return text.replace('/', '');
+  }
+
+  activeGeneralScroll() {
+    this.body.classList.remove('body-disabled-scroll');
+  }
+
+  deactivateGeneralScroll() {
+    this.body.classList.add('body-disabled-scroll');
   }
 }

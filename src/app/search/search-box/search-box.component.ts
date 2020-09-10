@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input, EventEmitter, Renderer2, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, Renderer2, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import * as interfaces from 'src/app/interfaces/interfaces';
 
@@ -17,6 +17,7 @@ export class SearchBoxComponent implements OnInit {
   incorrectForm: boolean = false;
 
   inputOpen: boolean = false;
+  lastKeywords: string;
 
   constructor(private renderer: Renderer2) { }
 
@@ -35,7 +36,13 @@ export class SearchBoxComponent implements OnInit {
           keywords: this.searchForm.get('keywords').value,
           page: 1
         }
-        this.searchEvent.emit(this.searchData);
+
+        if (this.lastKeywords != this.searchData.keywords) {
+          this.lastKeywords = this.searchData.keywords;
+          this.searchEvent.emit(this.searchData);
+        }
+
+
       } else {
         this.incorrectForm = true;
       }
